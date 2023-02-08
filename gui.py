@@ -1,12 +1,109 @@
 import customtkinter as ctk
+import sys
 
 
-"""
-This class contains all code for the input window and its errors.
-"""
+class OutputWindow(ctk.CTk):
+    """
+    This class contains the output window, along with plotting options.
+    """
+
+    """
+    Constructor, accepts data and creates GUI.
+    """
+    def __init__(self):
+        # some sample calculation output, for testing only
+        self.TESTDATA = {
+            "func": "-x**2+4x+1",
+            "varname": "x",
+            "lower": 0,
+            "upper": 3,
+            "mode": "Equal Interval",
+            "limittype": "Absolute Tolerance:",
+            "limitval": 0.1,
+            # check the values below once optimizer is implemented
+            "optpos": 2.01,
+            "optval": 4.991
+        }
+
+        self.data = self.TESTDATA
+        self.generations = {0: (1.5, 4.5), "final": (2.01, 4.991)}
+
+        # font settings
+        if sys.platform.startswith("linux"):
+            self.fontname = "Ubuntu"
+        elif sys.platform.startswith("win"):
+            self.fontname = "Segoe UI"
+        elif sys.platform.startswith("darwin"):
+            self.fontname = "Trebuchet MS"
+        else:
+            self.fontname = "Arial"  # probably fails, I don't expect to get here anyway
+
+        self.headerfont = ctk.CTkFont(self.fontname, 24)
+        self.labelfont = ctk.CTkFont(self.fontname, 16)
+        self.smallfont = ctk.CTkFont(self.fontname, 12)
+
+        # GUI handling
+        super().__init__()
+
+        ctk.set_appearance_mode("dark")
+        ctk.set_default_color_theme("dark-blue")
+
+        self.geometry("600x600")
+        self.title("MItO Output")
+        self.minsize(300, 300)
+
+        self.grid_columnconfigure((0, 1), weight=1)
+
+        self.header = ctk.CTkLabel(master=self, text="MItO Results", font=self.headerfont)
+        self.header.grid(row = 0, column = 0, columnspan = 2, padx = 20, pady = 20)
+
+        self.func_label = ctk.CTkLabel(master=self, text="Optimized the function", font=self.labelfont)
+        self.func_label.grid(row = 1, column = 0, padx = 20, pady = 20)
+
+        self.func_content = ctk.CTkLabel(master=self, text=self.data["func"], font=self.labelfont)
+        self.func_content.grid(row = 1, column = 1, padx = 20, pady = 20)
+
+        self.bounds_label = ctk.CTkLabel(master=self, text="on the interval", font=self.labelfont)
+        self.bounds_label.grid(row = 2, column = 0, padx = 20, pady = 20)
+
+        self.bounds_content = ctk.CTkLabel(master=self, text=f"{self.data['lower']} to {self.data['upper']}", font=self.labelfont)
+        self.bounds_content.grid(row = 2, column = 1, padx = 20, pady = 20)
+
+        self.mode_label = ctk.CTkLabel(master=self, text="using the", font=self.labelfont)
+        self.mode_label.grid(row = 3, column = 0, padx = 20, pady = 20)
+
+        self.mode_content = ctk.CTkLabel(master=self, text=f"{self.data['mode']} algorithm", font=self.labelfont)
+        self.mode_content.grid(row = 3, column = 1, padx = 20, pady = 20)
+
+        self.limit_label = ctk.CTkLabel(master=self, text="limited by", font=self.labelfont)
+        self.limit_label.grid(row = 4, column = 0, padx = 20, pady = 20)
+
+        self.func_content = ctk.CTkLabel(master=self, text=f"{self.data['limittype']} {self.data['limitval']}", font=self.labelfont)
+        self.func_content.grid(row = 4, column = 1, padx = 20, pady = 20)
+
+        self.func_label = ctk.CTkLabel(master=self, text="Found the maximum:", font=self.labelfont)
+        self.func_label.grid(row = 5, column = 0, padx = 20, pady = 20)
+
+        self.func_content = ctk.CTkLabel(master=self, text=f"{self.data['optval']} at {self.data['varname']} = {self.data['optpos']}", font=self.labelfont)
+        self.func_content.grid(row = 5, column = 1, padx = 20, pady = 20)
+
+        self.genlist = [f"Generation {i}" for i in list(self.generations.keys())[:-1]] + ["Final result"]
+
+        self.gen_menu = ctk.CTkOptionMenu(master = self, values = self.genlist)
+        self.gen_menu.grid(row = 6, column = 0, columnspan = 2, padx = 20, pady = 20)
+
+        self.submit = ctk.CTkButton(master = self, text = "Plot", command = self.plot, width = 120)
+        self.submit.grid(row = 7, column = 0, columnspan = 2)
+
+    def plot(self):
+        pass
 
 
 class InputWindow(ctk.CTk):
+    """
+    This class contains all code for the input window and its errors.
+    """
+
     """
     Constructor, mainly lots of GUI code.
     """
@@ -21,9 +118,18 @@ class InputWindow(ctk.CTk):
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("dark-blue")
 
-        self.headerfont = ctk.CTkFont("Ubuntu", 24)
-        self.labelfont = ctk.CTkFont("Ubuntu", 16)
-        self.smallfont = ctk.CTkFont("Ubuntu", 12)
+        if sys.platform.startswith("linux"):
+            self.fontname = "Ubuntu"
+        elif sys.platform.startswith("win"):
+            self.fontname = "Segoe UI"
+        elif sys.platform.startswith("darwin"):
+            self.fontname = "Trebuchet MS"
+        else:
+            self.fontname = "Arial"  # probably fails, I don't expect to get here anyway
+
+        self.headerfont = ctk.CTkFont(self.fontname, 24)
+        self.labelfont = ctk.CTkFont(self.fontname, 16)
+        self.smallfont = ctk.CTkFont(self.fontname, 12)
 
         self.geometry("600x600")
         self.title("MItO Input")
@@ -98,8 +204,9 @@ class InputWindow(ctk.CTk):
         self.submit.grid(row=7, column=0, columnspan=2, padx=20, pady=20)
 
     """
-    Function for displying error messages.
+    Function for displaying error messages.
     """
+
     def show_error(self, title, message):
         msgbox = ctk.CTkToplevel(self)
         msgbox.title(title)
@@ -109,7 +216,9 @@ class InputWindow(ctk.CTk):
         error_label = ctk.CTkLabel(master=msgbox, text=message, font=self.labelfont)
         error_label.pack(padx=20, pady=20)
 
-        okay = ctk.CTkButton(master=msgbox, text="OK", font=self.labelfont, command=msgbox.withdraw)
+        okay = ctk.CTkButton(
+            master=msgbox, text="OK", font=self.labelfont, command=msgbox.withdraw
+        )
         okay.pack(padx=20, pady=20)
 
     """
@@ -128,14 +237,14 @@ class InputWindow(ctk.CTk):
 
         # variable name - "char"
         var = self.var_input.get()
-        if len(var) > 1: # too long
+        if len(var) > 1:  # too long
             self.show_error("Input Error", "Variable name must be a single letter!")
             return
-        elif len(var) > 0 and not var.isalpha(): # disallowed characters
+        elif len(var) > 0 and not var.isalpha():  # disallowed characters
             self.show_error("Input Error", "Variable name must be a letter!")
             return
-        elif len(var) == 0: # nothing provided, use default
-            self.data["varname"] = 'x'
+        elif len(var) == 0:  # nothing provided, use default
+            self.data["varname"] = "x"
         else:
             self.data["varname"] = var
 
@@ -169,7 +278,9 @@ class InputWindow(ctk.CTk):
             try:
                 limit = int(limit)
             except ValueError:
-                self.show_error("Input Error", "Number of iterations must be an integer!")
+                self.show_error(
+                    "Input Error", "Number of iterations must be an integer!"
+                )
                 return
         else:
             try:
@@ -182,13 +293,17 @@ class InputWindow(ctk.CTk):
         # value validation
         # upper bound is above lower bound
         if self.data["lower"] >= self.data["upper"]:
-            self.show_error("Value Error", "Upper bound must be greater than lower bound!")
+            self.show_error(
+                "Value Error", "Upper bound must be greater than lower bound!"
+            )
             return
 
         # relative tolerance must be between 0 and 1
         if self.data["limittype"] == "Relative Tolerance:":
             if not 0 < self.data["limitval"] <= 1:
-                self.show_error("Value Error", "Relative tolerance must be between 0 and 1!")
+                self.show_error(
+                    "Value Error", "Relative tolerance must be between 0 and 1!"
+                )
                 return
 
         # absolute tolerance must be positive
@@ -202,7 +317,11 @@ class InputWindow(ctk.CTk):
             if not self.data["limitval"] > 0:
                 self.show_error("Value Error", "Number of iterations must be positive!")
 
-
+        # further action
+        # todo: insert optimizer call
+        # output
+        self.outwin = OutputWindow()
+        self.outwin.mainloop()
 
 
 class GUIRenderer:
