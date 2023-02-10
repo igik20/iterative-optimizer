@@ -7,7 +7,7 @@ from IPython.display import clear_output
 import time
 #Here we are importing all the required libraries needed for the construction and implementation of the Golden Search Algorithm.
 
-Class G_Search(d):
+class G_Search(d):
 	#This chunck of code checks whether a is bigger than b and prints a variable, which we called 'status'. This is really important
 	#for the overall algorithm because we want to check the location of the points in terms of each other.
 	def imput_check(a, b):
