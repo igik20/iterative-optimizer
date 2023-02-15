@@ -10,6 +10,7 @@ class OutputWindow(ctk.CTk):
     """
     Constructor, accepts data and creates GUI.
     """
+
     def __init__(self):
         # some sample calculation output, for testing only
         self.TESTDATA = {
@@ -22,7 +23,7 @@ class OutputWindow(ctk.CTk):
             "limitval": 0.1,
             # check the values below once optimizer is implemented
             "optpos": 2.01,
-            "optval": 4.991
+            "optval": 4.991,
         }
 
         self.data = self.TESTDATA
@@ -54,46 +55,78 @@ class OutputWindow(ctk.CTk):
 
         self.grid_columnconfigure((0, 1), weight=1)
 
-        self.header = ctk.CTkLabel(master=self, text="MItO Results", font=self.headerfont)
-        self.header.grid(row = 0, column = 0, columnspan = 2, padx = 20, pady = 20)
+        self.header = ctk.CTkLabel(
+            master=self, text="MItO Results", font=self.headerfont
+        )
+        self.header.grid(row=0, column=0, columnspan=2, padx=20, pady=20)
 
-        self.func_label = ctk.CTkLabel(master=self, text="Optimized the function", font=self.labelfont)
-        self.func_label.grid(row = 1, column = 0, padx = 20, pady = 20)
+        self.func_label = ctk.CTkLabel(
+            master=self, text="Optimized the function", font=self.labelfont
+        )
+        self.func_label.grid(row=1, column=0, padx=20, pady=20)
 
-        self.func_content = ctk.CTkLabel(master=self, text=self.data["func"], font=self.labelfont)
-        self.func_content.grid(row = 1, column = 1, padx = 20, pady = 20)
+        self.func_content = ctk.CTkLabel(
+            master=self, text=self.data["func"], font=self.labelfont
+        )
+        self.func_content.grid(row=1, column=1, padx=20, pady=20)
 
-        self.bounds_label = ctk.CTkLabel(master=self, text="on the interval", font=self.labelfont)
-        self.bounds_label.grid(row = 2, column = 0, padx = 20, pady = 20)
+        self.bounds_label = ctk.CTkLabel(
+            master=self, text="on the interval", font=self.labelfont
+        )
+        self.bounds_label.grid(row=2, column=0, padx=20, pady=20)
 
-        self.bounds_content = ctk.CTkLabel(master=self, text=f"{self.data['lower']} to {self.data['upper']}", font=self.labelfont)
-        self.bounds_content.grid(row = 2, column = 1, padx = 20, pady = 20)
+        self.bounds_content = ctk.CTkLabel(
+            master=self,
+            text=f"{self.data['lower']} to {self.data['upper']}",
+            font=self.labelfont,
+        )
+        self.bounds_content.grid(row=2, column=1, padx=20, pady=20)
 
-        self.mode_label = ctk.CTkLabel(master=self, text="using the", font=self.labelfont)
-        self.mode_label.grid(row = 3, column = 0, padx = 20, pady = 20)
+        self.mode_label = ctk.CTkLabel(
+            master=self, text="using the", font=self.labelfont
+        )
+        self.mode_label.grid(row=3, column=0, padx=20, pady=20)
 
-        self.mode_content = ctk.CTkLabel(master=self, text=f"{self.data['mode']} algorithm", font=self.labelfont)
-        self.mode_content.grid(row = 3, column = 1, padx = 20, pady = 20)
+        self.mode_content = ctk.CTkLabel(
+            master=self, text=f"{self.data['mode']} algorithm", font=self.labelfont
+        )
+        self.mode_content.grid(row=3, column=1, padx=20, pady=20)
 
-        self.limit_label = ctk.CTkLabel(master=self, text="limited by", font=self.labelfont)
-        self.limit_label.grid(row = 4, column = 0, padx = 20, pady = 20)
+        self.limit_label = ctk.CTkLabel(
+            master=self, text="limited by", font=self.labelfont
+        )
+        self.limit_label.grid(row=4, column=0, padx=20, pady=20)
 
-        self.func_content = ctk.CTkLabel(master=self, text=f"{self.data['limittype']} {self.data['limitval']}", font=self.labelfont)
-        self.func_content.grid(row = 4, column = 1, padx = 20, pady = 20)
+        self.func_content = ctk.CTkLabel(
+            master=self,
+            text=f"{self.data['limittype']} {self.data['limitval']}",
+            font=self.labelfont,
+        )
+        self.func_content.grid(row=4, column=1, padx=20, pady=20)
 
-        self.func_label = ctk.CTkLabel(master=self, text="Found the maximum:", font=self.labelfont)
-        self.func_label.grid(row = 5, column = 0, padx = 20, pady = 20)
+        self.func_label = ctk.CTkLabel(
+            master=self, text="Found the maximum:", font=self.labelfont
+        )
+        self.func_label.grid(row=5, column=0, padx=20, pady=20)
 
-        self.func_content = ctk.CTkLabel(master=self, text=f"{self.data['optval']} at {self.data['varname']} = {self.data['optpos']}", font=self.labelfont)
-        self.func_content.grid(row = 5, column = 1, padx = 20, pady = 20)
+        self.func_content = ctk.CTkLabel(
+            master=self,
+            text=f"{self.data['optval']} at {self.data['varname']} = {self.data['optpos']}",
+            font=self.labelfont,
+        )
+        self.func_content.grid(row=5, column=1, padx=20, pady=20)
 
-        self.genlist = [f"Generation {i}" for i in list(self.generations.keys())[:-1]] + ["Final result"]
+        self.genlist = [
+            f"Generation {i}" for i in list(self.generations.keys())[:-1]
+        ] + ["Final result"]
 
-        self.gen_menu = ctk.CTkOptionMenu(master = self, values = self.genlist)
-        self.gen_menu.grid(row = 6, column = 0, columnspan = 2, padx = 20, pady = 20)
+        self.gen_menu = ctk.CTkOptionMenu(master=self, values=self.genlist)
+        self.gen_menu.grid(row=6, column=0, columnspan=2, padx=20, pady=20)
 
-        self.submit = ctk.CTkButton(master = self, text = "Plot", command = self.plot, width = 120)
-        self.submit.grid(row = 7, column = 0, columnspan = 2)
+        self.submit = ctk.CTkButton(
+            master=self, text="Plot", command=self.plot, width=120
+        )
+        self.submit.grid(row=7, column=0, columnspan=2)
 
     def plot(self):
         pass
@@ -131,7 +164,7 @@ class InputWindow(ctk.CTk):
         self.labelfont = ctk.CTkFont(self.fontname, 16)
         self.smallfont = ctk.CTkFont(self.fontname, 12)
 
-        self.geometry("600x600")
+        self.geometry("600x620")
         self.title("MItO Input")
         self.minsize(300, 300)
 
@@ -184,6 +217,21 @@ class InputWindow(ctk.CTk):
         )
         self.mode_list.grid(row=5, column=1, padx=20, pady=20)
 
+        self.target_label = ctk.CTkLabel(
+            master=self, text="Optimization target:", font=self.labelfont
+        )
+        self.target_label.grid(row=6, column=0, padx=20, pady=20)
+
+        self.target_list = ctk.CTkOptionMenu(
+            master=self, 
+            values = [
+                "Minimum",
+                "Maximum"
+            ],
+            font = self.smallfont
+        )
+        self.target_list.grid(row=6, column=1, padx=20, pady=20)
+
         self.limit_list = ctk.CTkOptionMenu(
             master=self,
             values=[
@@ -193,15 +241,15 @@ class InputWindow(ctk.CTk):
             ],
             font=self.smallfont,
         )
-        self.limit_list.grid(row=6, column=0, padx=20, pady=20, sticky="ew")
+        self.limit_list.grid(row=7, column=0, padx=20, pady=20, sticky="ew")
 
         self.limit_input = ctk.CTkEntry(master=self, placeholder_text="Insert number")
-        self.limit_input.grid(row=6, column=1, padx=20, pady=20)
+        self.limit_input.grid(row=7, column=1, padx=20, pady=20)
 
         self.submit = ctk.CTkButton(
             master=self, text="Calculate", command=self.submit_data
         )
-        self.submit.grid(row=7, column=0, columnspan=2, padx=20, pady=20)
+        self.submit.grid(row=8, column=0, columnspan=2, padx=20, pady=20)
 
     """
     Function for displaying error messages.
@@ -269,8 +317,11 @@ class InputWindow(ctk.CTk):
         # optimization mode - from list
         self.data["mode"] = self.mode_list.get()
 
+        # optimization target - from list
+        self.data["target"] = self.target_list.get()
+
         # limit type - from list
-        self.data["limittype"] = self.limit_list.get()
+        self.data["limittype"] = self.limit_list.get()[:-1]
 
         # limit value - int or float
         limit = self.limit_input.get()
@@ -316,6 +367,9 @@ class InputWindow(ctk.CTk):
         if self.data["limittype"] == "Number of Iterations:":
             if not self.data["limitval"] > 0:
                 self.show_error("Value Error", "Number of iterations must be positive!")
+
+        # debug only
+        print(self.data)
 
         # further action
         # todo: insert optimizer call
