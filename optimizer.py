@@ -2,4 +2,4 @@ class optimizer(d):
   def __init__(self):
     self.dictionary()
   def opt(dictionary):
-    Goldendiction
+    G_search(self.dictionary)
