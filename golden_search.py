@@ -88,22 +88,23 @@ class G_Search:
 		plot_graph(blow, bup, a, b)
 		plt.show()
 		
-		if limtype == "Number of Iterations" and iteration >= limval:
-			break
-		elif limtype == "Absolute Tolerance" and bup - blow <= limval:
-			break
-		elif limtype == "Relative Tolerance" and (bup - blow) / blow <= limval:
-			break
-		elif iteration >= ABSMAX:
-			break
-			
-		if version=='max':
-			bnew = max_search(blow, bup, a, b, status)
-		elif version=='min':
-			bnew = min_search(blow, bup, a, b, status)
-		else:
-			print('Min/Max status not definded properly.')
-			break
+		while True:
+			if limtype == "Number of Iterations" and iteration >= limval:
+				break
+			elif limtype == "Absolute Tolerance" and bup - blow <= limval:
+				break
+			elif limtype == "Relative Tolerance" and (bup - blow) / blow <= limval:
+				break
+			elif iteration >= ABSMAX:
+				break
+
+			if version=='max':
+				bnew = max_search(blow, bup, a, b, status)
+			elif version=='min':
+				bnew = min_search(blow, bup, a, b, status)
+			else:
+				print('Min/Max status not definded properly.')
+				break
 		
 		return bnew
 		blow = bnew[0]
@@ -145,5 +146,5 @@ class G_Search:
 		plt.annotate('b',xy=(b-0.01,-0.2))
 
 		#setting the limit of the window:
-		plt.ylim([-1.2,1.2])
+		plt.ylim([-1.3,1.3])
 		plt.show()
