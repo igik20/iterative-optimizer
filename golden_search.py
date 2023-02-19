@@ -83,8 +83,8 @@ class G_Search:
         f1 = func(a)
         f2 = func(b)
 
-        G_Search.plot_graph(blow, bup, a, b)
-        plt.show()
+        #G_Search.plot_graph(blow, bup, a, b)
+        #plt.show()
 
         while True:
             if limtype == "Number of Iterations" and iteration >= limval:
@@ -106,6 +106,26 @@ class G_Search:
 
         return bnew
 
+    @staticmethod
+    def creating_plot(func, blow, bup, a, b):
+        x = np.linspace(blow, bup, 100)
+        y = [func(i) for i in x]
+        plt.plot(x, y)
+        plt.axvline(x = blow, color = "blue")
+        plt.axvline(x = bup, color = "blue")
+        plt.show()
+        
+    @staticmethod
+    def plot_result(func, blow, bup, coord, val):
+        x = np.linspace(blow, bup, 100)
+        y = [func(i) for i in x]
+        plt.plot(x, y)
+        plt.axvline(x = coord, color = "red")
+        plt.axhline(y = val, color = "red")
+        plt.show()
+    
+    
+    '''
     @staticmethod
     def plot_graph(func, blow, bup, a, b):
         # basic plotting, sin graph and coordinate sys
@@ -138,3 +158,4 @@ class G_Search:
         # setting the limit of the window:
         plt.ylim([-1.3, 1.3])
         plt.show()
+'''
