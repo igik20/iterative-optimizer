@@ -84,44 +84,50 @@ class G_Search:
 #Search Algorithm.
 #
 
-	def GOLDEN_search(blow, bup, versiq, error_trash):
+#limittype and limval are not defined and have not been defined in any of the functions above
+	def GOLDEN_search(blow, bup, limittype, limval, versiq):
+		ABSMAX = 10**6
 		iteration = 0
-		our_e = 1
-		while error_trash<=our_e:
-			new_pt = boundary_insidepts(blow, bup)
-			a = new_pt[0]
-			b = new_pt[1]
-			f1 = sin_grab(a)
-			f2 = sin_grab(b)
-			status = in
+		new_pt = boundary_insidepts(blow, bup)
+		a = new_pt[0]
+		b = new_pt[1]
+		f1 = sin_grab(a)
+		f2 = sin_grab(b)
+		status = in
 			
 			
-			
-			put_check(a, b)
-			clear_output(wait=True)
-			
-			
-			plot_graph(blow, bup, a, b)
-			plt.show()
+		put_check(a, b)
+		clear_output(wait=True)
 			
 			
-			if versiq=='max':
-				bnew = max_search(blow, bup, a, b, status)
-			elif versiq=='min':
-				bnew = min_search(blow, bup, a, b, status)
-			else:
-				print('Min/Max status not definded properly.')
-				break
-			blow = bnew[0]
-			bup = bnew[1]
-			opt_pt = bnew[2]
+		plot_graph(blow, bup, a, b)
+		plt.show()
+		
+		if limtype == "Number of Iterations" and iteration >= limval:
+			break
+		elif limtype == "Absolute Tolerance" and bup - blow <= limval:
+			break
+		elif limtype == "Relative Tolerance" and (bup - blow) / blow <= limval:
+			break
+		elif iteration >= ABSMAX:
+			break
 			
-			iteration+=1
-			print ('Iteration: ', iteration)
-			ratio=(np.sqrt(5)-1)/2
-			our_e=((1-r)*(abs((xu-xl)/xopt)))*100
-			print('Error:', our_e)
-			time.sleep(1)
+		if versiq=='max':
+			bnew = max_search(blow, bup, a, b, status)
+		elif versiq=='min':
+			bnew = min_search(blow, bup, a, b, status)
+		else:
+			print('Min/Max status not definded properly.')
+			break
+		
+		return bnew
+		blow = bnew[0]
+		bup = bnew[1]
+		opt_pt = bnew[2]
+		iteration+=1
+		#print ('Iteration: ', iteration)
+		time.sleep(1)
+			
 			
 	def plot_graph(blow,bup,a,b):
 		clear_output(wait=True)
