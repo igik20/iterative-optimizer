@@ -44,7 +44,7 @@ class Optimizer:
             "maxcoord": self.maxcoord,
             "maxval": self.maxval,
             "generations": self.generations
-            "versiq": self.versiq
+            "version": self.version
         }
         return data
 
