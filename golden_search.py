@@ -8,20 +8,7 @@ import time
 #Here we are importing all the required libraries needed for the construction and implementation of the Golden Search Algorithm.
 
 class G_Search:
-	#I don't know if we need this first part, but I don't think so.
-	#def __init__(self):
-		#self.d ={}
-	#This chunck of code checks whether a is bigger than b and prints a variable, which we called 'status'. This is really important
-	#for the overall algorithm because we want to check the location of the points in terms of each other.
-	def input_check(a, b):
-		if b<a:
-			status='correct'
-		else:
-			status='wrong'
-		return status
-
-	#Central for the Golden Search Algorithm is checking which is the extremum value inside the sin graph. For this purpose, we are
-	#using the np library to create a function which returns the sin of a value.
+	
 	def sin_grab(x):
 		our_sin=np.sin(x)
 		return our_sin
@@ -42,10 +29,10 @@ class G_Search:
 	#opt_pt: optimal point 
 	#new_pt: new point, using the function boundary_insidepts
 	
-	def min_search(blow, bup, a, b, status):
+	def min_search(blow, bup, a, b):
 		f1 = sin_grab(a)
 		f2 = sin_grab(b)
-		if status=='correct' and f2>f1:
+		if f2>f1:
 			blow = b
 			bup = bup
 			new_pt = boundary_insidepts(blow, bup)
@@ -61,10 +48,10 @@ class G_Search:
 			opt_pt = b
 		return blow, bup, opt_pt
 
-	def max_search(blow, bup, a, b, status):
+	def max_search(blow, bup, a, b):
 		f1 = sin_grab(a)
 		f2 = sin_grab(b)
-		if status=='correct' and f2>f1:
+		if f2>f1:
 			blow = blow
 			bup = a
 			new_pt = boundary_insidepts(blow, bup)
