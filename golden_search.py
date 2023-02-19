@@ -8,11 +8,12 @@ import time
 #Here we are importing all the required libraries needed for the construction and implementation of the Golden Search Algorithm.
 
 class G_Search(d):
-	def __init__(self):
-		self.d ={}
+	#I don't know if we need this first part, but I don't think so.
+	#def __init__(self):
+		#self.d ={}
 	#This chunck of code checks whether a is bigger than b and prints a variable, which we called 'status'. This is really important
 	#for the overall algorithm because we want to check the location of the points in terms of each other.
-	def imput_check(a, b):
+	def input_check(a, b):
 		if b<a:
 			status='correct'
 		else:
@@ -25,9 +26,9 @@ class G_Search(d):
 		our_sin=np.sin(x)
 		return our_sin
 
-	#Here we are making sure that the interior values do not surpass the boundry values.
-	#bup: upper boundry value
-	#blow: lower boundry value
+	#Here we are making sure that the interior values do not surpass the boundary values.
+	#bup: upper boundary value
+	#blow: lower boundary value
 	
 	def boundry_insidepts(blow, bup):
 		z =((np.sqrt(5)-1)/2)*(bup-blow)
@@ -39,7 +40,7 @@ class G_Search(d):
 	#2 different cases - a minimal golden search and a maximum golden search. The criteria for selecting that optimal point will 
 	#differ for both cases mentioned above, therefore we will have the 2 following functions - min_search and max_search.
 	#opt_pt: optimal point 
-	#new_pt: new point, using the function boundry_insidepts
+	#new_pt: new point, using the function boundary_insidepts
 	
 	def min_search(blow, bup, a, b, status):
 		f1 = sin_grab(a)
@@ -47,14 +48,14 @@ class G_Search(d):
 		if status=='correct' and f2>f1:
 			blow = b
 			bup = bup
-			new_pt = boundry_insidepts(blow, bup)
+			new_pt = boundary_insidepts(blow, bup)
 			a = new_pt[0]
 			b = new_pt[1]
 			opt_pt = a
 		else:
 			blow = blow
 			bup = a
-			new_pt = boundry_insidepts(blow, bup)
+			new_pt = boundary_insidepts(blow, bup)
 			a = new_pt[0]
 			b = new_pt[1]
 			opt_pt = b
@@ -66,14 +67,14 @@ class G_Search(d):
 		if status=='correct' and f2>f1:
 			blow = blow
 			bup = a
-			new_pt = boundry_insidepts(blow, bup)
+			new_pt = boundary_insidepts(blow, bup)
 			a = new_pt[0]
 			b = new_pt[1]
 			opt_pt = b
 		else:
 			blow = b
 			bup = bup
-			new_pt = boundry_insidepts(blow, bup)
+			new_pt = boundary_insidepts(blow, bup)
 			a = new_pt[0]
 			b = new_pt[1]
 			opt_pt = a
@@ -87,12 +88,16 @@ class G_Search(d):
 		iteration = 0
 		our_e = 1
 		while error_trash<=our_e:
-			new_pt = boundry_insidepts(blow, bup)
+			new_pt = boundary_insidepts(blow, bup)
 			a = new_pt[0]
 			b = new_pt[1]
 			f1 = sin_grab(a)
 			f2 = sin_grab(b)
-			status = imput_check(a, b)
+			status = in
+			
+			
+			
+			put_check(a, b)
 			clear_output(wait=True)
 			
 			
