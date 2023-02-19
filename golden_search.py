@@ -35,14 +35,14 @@ class G_Search:
 		if f2>f1:
 			blow = b
 			bup = bup
-			new_pt = boundary_insidepts(blow, bup)
+			new_pt = self.boundary_insidepts(blow, bup)
 			a = new_pt[0]
 			b = new_pt[1]
 			opt_pt = a
 		else:
 			blow = blow
 			bup = a
-			new_pt = boundary_insidepts(blow, bup)
+			new_pt = self.boundary_insidepts(blow, bup)
 			a = new_pt[0]
 			b = new_pt[1]
 			opt_pt = b
@@ -54,14 +54,14 @@ class G_Search:
 		if f2>f1:
 			blow = blow
 			bup = a
-			new_pt = boundary_insidepts(blow, bup)
+			new_pt = self.boundary_insidepts(blow, bup)
 			a = new_pt[0]
 			b = new_pt[1]
 			opt_pt = b
 		else:
 			blow = b
 			bup = bup
-			new_pt = boundary_insidepts(blow, bup)
+			new_pt = self.boundary_insidepts(blow, bup)
 			a = new_pt[0]
 			b = new_pt[1]
 			opt_pt = a
@@ -75,7 +75,7 @@ class G_Search:
 	def GOLDEN_search(blow, bup, limittype, limval, version):
 		ABSMAX = 10**6
 		iteration = 0
-		new_pt = boundary_insidepts(blow, bup)
+		new_pt = self.boundary_insidepts(blow, bup)
 		a = new_pt[0]
 		b = new_pt[1]
 		f1 = sin_grab(a)
