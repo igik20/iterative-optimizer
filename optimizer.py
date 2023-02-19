@@ -7,7 +7,7 @@ from search import Midpoint_Search
 class Optimizer:
     def __init__(self, indict):
         # unpack the dict object into variables
-        self.func = sympy.labmdify(sympy.parse_expr(indict["function"]))
+        self.func = sympy.lambdify(sympy.parse_expr(indict["function"]))
         self.varname = indict["varname"]
         self.lower = indict["lower"]
         self.upper = indict["upper"]
