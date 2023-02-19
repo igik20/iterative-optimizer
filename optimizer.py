@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import Tuple, Callable, Any, Literal
-from golden_search.py import*
-from search.py import*
+#from golden_search.py import*
+#from search.py import*
 
 Class Optimizer:
   def __init__(self):
