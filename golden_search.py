@@ -96,9 +96,9 @@ class G_Search:
             elif iteration >= ABSMAX:
                 break
 
-            if version == "max":
+            if version == "Maximum":
                 bnew = G_Search.max_search(func, blow, bup, a, b)
-            elif version == "min":
+            elif version == "Minimum":
                 bnew = G_Search.min_search(func, blow, bup, a, b)
             else:
                 print("Min/Max status not definded properly.")
