@@ -1,4 +1,6 @@
 import math
+import matplotlib.pyplot as plt
+import numpy as np
 
 # hard iteration limit, do not change unless strongly justified
 ABSMAX = 10**6
@@ -48,6 +50,26 @@ class Midpoint_Search:
             i += 1
 
         return mid, func(mid), generations
+
+    @staticmethod
+    def plot_generation(func, lower, mid, upper):
+        x = np.linspace(lower, upper, 100)
+        y = [func(i) for i in x]
+        plt.plot(x, y)
+        plt.axvline(x = lower, color = "blue")
+        plt.axvline(x = upper, color = "blue")
+        plt.axvline(x = mid, color = "red")
+        plt.show()
+
+    @staticmethod
+    def plot_result(func, lower, upper, coord, val):
+        x = np.linspace(lower, upper, 100)
+        y = [func(i) for i in x]
+        plt.plot(x, y)
+        plt.axvline(x = coord, color = "red")
+        plt.axhline(y = val, color = "red")
+        plt.show()
+
 
 #I don't think we need this part as it's a class now.
 #if __name__=="__main__":

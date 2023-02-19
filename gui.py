@@ -132,7 +132,23 @@ class OutputWindow(ctk.CTk):
         self.submit.grid(row=7, column=0, columnspan=2)
 
     def plot(self):
-        pass
+        genname = self.gen_menu.get()
+        if self.data["mode"] == "Equal Interval":
+            if genname.startswith("Gen"):
+                gen = self.generations[int(genname.split()[-1])]
+                Midpoint_Search.plot_generation(
+                    self.data["func"], gen[0], gen[1], gen[2]
+                )
+            else:
+                Midpoint_Search.plot_result(
+                    self.data["func"],
+                    self.data["lower"],
+                    self.data["upper"],
+                    self.data["maxcoord"],
+                    self.data["maxval"],
+                )
+        else:
+            pass
 
 
 class InputWindow(ctk.CTk):
@@ -226,12 +242,7 @@ class InputWindow(ctk.CTk):
         self.target_label.grid(row=6, column=0, padx=20, pady=20)
 
         self.target_list = ctk.CTkOptionMenu(
-            master=self, 
-            values = [
-                "Minimum",
-                "Maximum"
-            ],
-            font = self.smallfont
+            master=self, values=["Minimum", "Maximum"], font=self.smallfont
         )
         self.target_list.grid(row=6, column=1, padx=20, pady=20)
 
@@ -375,7 +386,7 @@ class InputWindow(ctk.CTk):
         print(self.data)
 
         # further action
-        # optimizer 
+        # optimizer
         self.opt = Optimizer(self.data)
         self.res = self.opt.get()
         # output

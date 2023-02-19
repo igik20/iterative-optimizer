@@ -25,13 +25,15 @@ class Optimizer:
                 self.func, self.lower, self.upper, self.limittype, self.limitval
             )
         else:
-            (
-                self.maxcoord, 
-                self.maxval, 
-                self.versiq = G_Search.GOLDEN_search(
-                self.func, self.lower, self.upper, self.limittype, self.limitval, self.versiq
+            (self.maxcoord, self.maxval, self.versiq) = G_Search.GOLDEN_search(
+                self.func,
+                self.lower,
+                self.upper,
+                self.limittype,
+                self.limitval,
+                self.versiq
             )
-                #self.func is not directly used in GOLDEN_search, but we use 2 values directly, not a function
+            # self.func is not directly used in GOLDEN_search, but we use 2 values directly, not a function
 
     def get(self):
         data = {
@@ -44,8 +46,8 @@ class Optimizer:
             "limitval": self.limitval,
             "maxcoord": self.maxcoord,
             "maxval": self.maxval,
-            "generations": self.generations
-            "version": self.version
+            "generations": self.generations,
+            "version": self.version,
         }
         return data
 
