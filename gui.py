@@ -1,5 +1,8 @@
 import customtkinter as ctk
 import sys
+from optimizer import Optimizer
+from search import Midpoint_Search
+from golden_search import G_Search
 
 
 class OutputWindow(ctk.CTk):
@@ -11,7 +14,7 @@ class OutputWindow(ctk.CTk):
     Constructor, accepts data and creates GUI.
     """
 
-    def __init__(self):
+    def __init__(self, data):
         # some sample calculation output, for testing only
         self.TESTDATA = {
             "func": "-x**2+4x+1",
@@ -26,8 +29,8 @@ class OutputWindow(ctk.CTk):
             "optval": 4.991,
         }
 
-        self.data = self.TESTDATA
-        self.generations = {0: (1.5, 4.5), "final": (2.01, 4.991)}
+        self.data = data
+        # self.generations = {0: (1.5, 4.5), "final": (2.01, 4.991)}
 
         # font settings
         if sys.platform.startswith("linux"):
@@ -350,7 +353,7 @@ class InputWindow(ctk.CTk):
             return
 
         # relative tolerance must be between 0 and 1
-        if self.data["limittype"] == "Relative Tolerance:":
+        if self.data["limittype"] == "Relative Tolerance":
             if not 0 < self.data["limitval"] <= 1:
                 self.show_error(
                     "Value Error", "Relative tolerance must be between 0 and 1!"
@@ -358,13 +361,13 @@ class InputWindow(ctk.CTk):
                 return
 
         # absolute tolerance must be positive
-        if self.data["limittype"] == "Absolute Tolerance:":
+        if self.data["limittype"] == "Absolute Tolerance":
             if not self.data["limitval"] > 0:
                 self.show_error("Value Error", "Absolute tolerance must be positive!")
                 return
 
         # number of iterations must be positive
-        if self.data["limittype"] == "Number of Iterations:":
+        if self.data["limittype"] == "Number of Iterations":
             if not self.data["limitval"] > 0:
                 self.show_error("Value Error", "Number of iterations must be positive!")
 
@@ -372,9 +375,11 @@ class InputWindow(ctk.CTk):
         print(self.data)
 
         # further action
-        # todo: insert optimizer call
+        # optimizer 
+        self.opt = Optimizer(self.data)
+        self.res = self.opt.get()
         # output
-        self.outwin = OutputWindow()
+        self.outwin = OutputWindow(self.res)
         self.outwin.mainloop()
 
 

@@ -1,14 +1,22 @@
 import math
 
-Class Midpoint_Search:
+# hard iteration limit, do not change unless strongly justified
+ABSMAX = 10**6
 
+class Midpoint_Search:
+
+    # for testing only
     def f(x):
         return 1 / x
 
 
-    def midpoint_search(func, lower, upper, niter):
+    def midpoint_search(func, lower, upper, limtype, limval):
         mid = (upper + lower) / 2
-        for i in range(niter):
+        i = 0
+        generations = {}
+        # optimization loop
+        while True:
+            # calculations
             eps = (upper - lower) / 10
 
             m_plus = mid + eps
@@ -23,11 +31,23 @@ Class Midpoint_Search:
                 upper = mid
             mid = (upper + lower) / 2
 
-        return mid, func(mid)
+            # exit conditions
+            if limtype == "Number of Iterations" and i >= limval:
+                break
+            elif limtype == "Absolute Tolerance" and upper - lower <= limval:
+                break
+            elif limtype == "Relative Tolerance" and (upper - lower) / mid <= limval:
+                break
+            elif i >= ABSMAX:
+                break
 
+            # save the generation
+            generations[i] = (lower, mid, upper)
 
-    def main():
-        print(midpoint_search(f, -2, 2, 50))
+            # count iterations for iteration limits
+            i += 1
+
+        return mid, func(mid), generations
 
 #I don't think we need this part as it's a class now.
 #if __name__=="__main__":
