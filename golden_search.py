@@ -79,9 +79,7 @@ class G_Search:
 		a = new_pt[0]
 		b = new_pt[1]
 		f1 = sin_grab(a)
-		f2 = sin_grab(b)
-		status = in
-			
+		f2 = sin_grab(b)	
 			
 		put_check(a, b)
 		clear_output(wait=True)
