@@ -85,7 +85,7 @@ class G_Search:
 #
 
 #limittype and limval are not defined and have not been defined in any of the functions above
-	def GOLDEN_search(blow, bup, limittype, limval, versiq):
+	def GOLDEN_search(blow, bup, limittype, limval, version):
 		ABSMAX = 10**6
 		iteration = 0
 		new_pt = boundary_insidepts(blow, bup)
@@ -112,9 +112,9 @@ class G_Search:
 		elif iteration >= ABSMAX:
 			break
 			
-		if versiq=='max':
+		if version=='max':
 			bnew = max_search(blow, bup, a, b, status)
-		elif versiq=='min':
+		elif version=='min':
 			bnew = min_search(blow, bup, a, b, status)
 		else:
 			print('Min/Max status not definded properly.')
