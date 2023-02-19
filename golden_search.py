@@ -78,6 +78,7 @@ class G_Search:
     def GOLDEN_search(func, blow, bup, limtype, limval, version):
         ABSMAX = 10**6
         iteration = 0
+        generations = {}
         new_pt = G_Search.boundary_insidepts(blow, bup)
         a = new_pt[0]
         b = new_pt[1]
@@ -102,11 +103,14 @@ class G_Search:
             elif version == "Minimum":
                 bnew = G_Search.min_search(func, blow, bup, a, b)
             else:
-                print("Min/Max status not definded properly.")
+                print("Minimum/Maximum status not definded properly.")
                 break
+        generations[iteration] = (blow, a, b, bup)
+        iteration+=1
+        return bnew, func(bnew), generations
 
-        return bnew
-
+    
+    
     @staticmethod
     def plot_generation(func, blow, bup, a, b):
         x = np.linspace(blow, bup, 100)
