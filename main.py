@@ -1,5 +1,5 @@
 """
-Minimal Iterative Optimizer by Yvette Dimitrova and Igor Trujnara. MIT licence.
+Minimal Iterative Optimizer by Yvette Dimitrova and Igor Trujnara. MIT license.
 """
 
 from gui import GUIRenderer
