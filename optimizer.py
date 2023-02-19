@@ -1,4 +1,5 @@
 from __future__ import annotations
+import sympy
 from golden_search import G_Search
 from search import Midpoint_Search
 
@@ -6,7 +7,7 @@ from search import Midpoint_Search
 class Optimizer:
     def __init__(self, indict):
         # unpack the dict object into variables
-        self.func = indict["function"]
+        self.func = sympy.labmdify(sympy.parse_expr(indict["function"]))
         self.varname = indict["varname"]
         self.lower = indict["lower"]
         self.upper = indict["upper"]
