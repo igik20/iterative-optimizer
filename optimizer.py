@@ -30,7 +30,7 @@ class Optimizer:
                 self.versiq = G_Search.GOLDEN_search(
                 self.func, self.lower, self.upper, self.limittype, self.limitval, self.versiq
             )
-                #self.func is not directly used in GOLDEN_search, but in one of the functions above
+                #self.func is not directly used in GOLDEN_search, but we use 2 values directly, not a function
 
     def get(self):
         data = {
