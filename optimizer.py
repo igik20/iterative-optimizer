@@ -1,3 +1,7 @@
+"""
+Minimal Iterative Optimizer by Yvette Dimitrova and Igor Trujnara. MIT licence.
+"""
+
 from __future__ import annotations
 import sympy
 from golden_search import G_Search
@@ -35,9 +39,11 @@ class Optimizer:
                 self.limitval,
                 self.target,
             )
-            # self.func is not directly used in GOLDEN_search, but we use 2 values directly, not a function
 
     def get(self):
+        """
+        Returns the optimization result for external use.
+        """
         data = {
             "func": self.func,
             "exec": self.exec,

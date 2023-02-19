@@ -1,3 +1,7 @@
+"""
+Minimal Iterative Optimizer by Yvette Dimitrova and Igor Trujnara. MIT licence.
+"""
+
 import customtkinter as ctk
 import sys
 import matplotlib
@@ -137,6 +141,9 @@ class OutputWindow(ctk.CTk):
         self.submit.grid(row=7, column=0, columnspan=2)
 
     def plot(self):
+        """
+        Callback function for plotting the requested generation or final result.
+        """
         genname = self.gen_menu.get()
         if self.data["mode"] == "Equal Interval":
             if genname.startswith("Gen"):

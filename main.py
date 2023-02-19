@@ -1,3 +1,7 @@
+"""
+Minimal Iterative Optimizer by Yvette Dimitrova and Igor Trujnara. MIT licence.
+"""
+
 from gui import GUIRenderer
 
 

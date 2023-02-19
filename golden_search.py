@@ -1,6 +1,7 @@
 """
-GOLDEN SEARCH ALGORITHM
+Minimal Iterative Optimizer by Yvette Dimitrova and Igor Trujnara. MIT licence.
 """
+
 import numpy as np
 import matplotlib.pyplot as plt
 import time
@@ -107,10 +108,12 @@ class G_Search:
         return bnew
 
     @staticmethod
-    def creating_plot(func, blow, bup, a, b):
+    def plot_generation(func, blow, bup, a, b):
         x = np.linspace(blow, bup, 100)
         y = [func(i) for i in x]
         plt.plot(x, y)
+        plt.axvline(x = a, color = "green")
+        plt.axvline(x = b, color = "green")
         plt.axvline(x = blow, color = "blue")
         plt.axvline(x = bup, color = "blue")
         plt.show()

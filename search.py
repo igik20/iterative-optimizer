@@ -1,3 +1,7 @@
+"""
+Minimal Iterative Optimizer by Yvette Dimitrova and Igor Trujnara. MIT licence.
+"""
+
 import math
 import matplotlib.pyplot as plt
 import numpy as np
@@ -6,6 +10,9 @@ import numpy as np
 ABSMAX = 10**6
 
 class Midpoint_Search:
+    """
+    Utility class with functions used for equal interval optimization and result plotting.
+    """
 
     # for testing only
     def f(x):
@@ -13,6 +20,9 @@ class Midpoint_Search:
 
 
     def midpoint_search(func, lower, upper, limtype, limval, target):
+        """
+        The main optimization function.
+        """
         mid = (upper + lower) / 2
         i = 0
         generations = {}
@@ -58,6 +68,9 @@ class Midpoint_Search:
 
     @staticmethod
     def plot_generation(func, lower, mid, upper):
+        """
+        Plots bounds and midpoint for a given generation.
+        """
         x = np.linspace(lower, upper, 100)
         y = [func(i) for i in x]
         plt.plot(x, y)
@@ -68,14 +81,12 @@ class Midpoint_Search:
 
     @staticmethod
     def plot_result(func, lower, upper, coord, val):
+        """
+        Plots optimization results from equal interval search.
+        """
         x = np.linspace(lower, upper, 100)
         y = [func(i) for i in x]
         plt.plot(x, y)
         plt.axvline(x = coord, color = "red")
         plt.axhline(y = val, color = "red")
         plt.show()
-
-
-#I don't think we need this part as it's a class now.
-#if __name__=="__main__":
-    #main()
