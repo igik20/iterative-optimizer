@@ -7,7 +7,7 @@ from IPython.display import clear_output
 import time
 #Here we are importing all the required libraries needed for the construction and implementation of the Golden Search Algorithm.
 
-class G_Search(d):
+class G_Search:
 	#I don't know if we need this first part, but I don't think so.
 	#def __init__(self):
 		#self.d ={}
