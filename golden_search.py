@@ -122,3 +122,37 @@ class G_Search:
 			our_e=((1-r)*(abs((xu-xl)/xopt)))*100
 			print('Error:', our_e)
 			time.sleep(1)
+			
+	def plot_graph(blow,bup,a,b):
+		clear_output(wait=True)
+		
+		#basic plotting, sin graph and coordinate sys
+		plt.plot(x,y)
+		plt.plot([0,6],[0,0],'k')
+		
+		#plotting blow line
+		plt.plot([blow,blow],[0,sin_grab(blow)])
+		plt.annotate('lower limit',xy=(blow-0.01,-0.2))
+		
+		#plotting bup line
+		plt.plot([bup,bup],[0,sin_grab(bup)])
+		plt.annotate('upper limit',xy=(bup-0.01,-0.2))
+
+		#plotting the first point
+		plt.plot(a,sin_grab(a),'ro',label='a')
+		plt.plot([a,a],[0,sin_grab(a)],'k')
+		#plotting the second point
+		plt.plot(b,sin_grab(b),'bo',label='b')
+		plt.plot([b,b],[0,sin_grab(b)],'k')
+
+		#plotting the first line, associated with a
+		plt.plot([a,a],[0,sin_grab(a)],'k')
+		plt.annotate('a',xy=(a-0.01,-0.2))
+
+		#plotting the second line, associated with b
+		plt.plot([b,b],[0,sin_grab(b)],'k')
+		plt.annotate('b',xy=(b-0.01,-0.2))
+
+		#setting the limit of the window:
+		plt.ylim([-1.2,1.2])
+		plt.show()
