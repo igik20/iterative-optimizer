@@ -12,7 +12,7 @@ class Midpoint_Search:
         return 1 / x
 
 
-    def midpoint_search(func, lower, upper, limtype, limval):
+    def midpoint_search(func, lower, upper, limtype, limval, target):
         mid = (upper + lower) / 2
         i = 0
         generations = {}
@@ -26,11 +26,16 @@ class Midpoint_Search:
 
             f_plus = func(m_plus)
             f_minus = func(m_minus)
-
-            if f_plus > f_minus:
-                lower = mid
+            if target == "Maximum":
+                if f_plus > f_minus:
+                    lower = mid
+                else:
+                    upper = mid
             else:
-                upper = mid
+                if f_plus < f_minus:
+                    lower = mid
+                else:
+                    upper = mid
             mid = (upper + lower) / 2
 
             # exit conditions

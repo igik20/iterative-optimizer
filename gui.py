@@ -1,5 +1,6 @@
 import customtkinter as ctk
 import sys
+import matplotlib
 from optimizer import Optimizer
 from search import Midpoint_Search
 from golden_search import G_Search
@@ -30,7 +31,9 @@ class OutputWindow(ctk.CTk):
         }
 
         self.data = data
-        # self.generations = {0: (1.5, 4.5), "final": (2.01, 4.991)}
+        self.generations = self.data["generations"]
+
+        matplotlib.use("TkAgg")
 
         # font settings
         if sys.platform.startswith("linux"):
@@ -108,13 +111,15 @@ class OutputWindow(ctk.CTk):
         self.func_content.grid(row=4, column=1, padx=20, pady=20)
 
         self.func_label = ctk.CTkLabel(
-            master=self, text="Found the maximum:", font=self.labelfont
+            master=self,
+            text=f"Found the {self.data['target'].lower()}:",
+            font=self.labelfont,
         )
         self.func_label.grid(row=5, column=0, padx=20, pady=20)
 
         self.func_content = ctk.CTkLabel(
             master=self,
-            text=f"{self.data['optval']} at {self.data['varname']} = {self.data['optpos']}",
+            text=f"{round(float(self.data['optval']), 3)} at {self.data['varname']} = {round(float(self.data['optpos']), 3)}",
             font=self.labelfont,
         )
         self.func_content.grid(row=5, column=1, padx=20, pady=20)
@@ -137,15 +142,15 @@ class OutputWindow(ctk.CTk):
             if genname.startswith("Gen"):
                 gen = self.generations[int(genname.split()[-1])]
                 Midpoint_Search.plot_generation(
-                    self.data["func"], gen[0], gen[1], gen[2]
+                    self.data["exec"], gen[0], gen[1], gen[2]
                 )
             else:
                 Midpoint_Search.plot_result(
-                    self.data["func"],
+                    self.data["exec"],
                     self.data["lower"],
                     self.data["upper"],
-                    self.data["maxcoord"],
-                    self.data["maxval"],
+                    self.data["optpos"],
+                    self.data["optval"],
                 )
         else:
             pass
