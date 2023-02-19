@@ -105,8 +105,10 @@ class G_Search:
             else:
                 print("Minimum/Maximum status not definded properly.")
                 break
-        generations[iteration] = (blow, a, b, bup)
-        iteration+=1
+            #history to save information about each iteration
+            generations[iteration] = (blow, a, b, bup)
+            #next iteration
+            iteration+=1
         return bnew, func(bnew), generations
 
     
