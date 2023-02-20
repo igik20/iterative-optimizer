@@ -116,7 +116,7 @@ class G_Search:
                     a = new_pt[0]
                     b = new_pt[1]
                     opt_pt = a
-                return blow, bup, opt_pt
+                bnew = blow, bup, opt_pt
                 #bnew = G_Search.max_search(func, blow, bup, a, b)
             elif version == "Minimum":
                 f1 = func(a)
@@ -135,7 +135,7 @@ class G_Search:
                     a = new_pt[0]
                     b = new_pt[1]
                     opt_pt = b
-                return blow, bup, opt_pt
+                bnew = blow, bup, opt_pt
                 #bnew = G_Search.min_search(func, blow, bup, a, b)
             else:
                 print("Minimum/Maximum status not definded properly.")
