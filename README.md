@@ -41,6 +41,8 @@ The algorithms used are only computational approximation methods, and will not a
 
 Additionally, for multimodal functions, the algorithms will only converge to one of the extrema of the desired type.
 
+_Tip: If the algorithm becomes locked at a local extremum, try re-running it with a narrower starting interval._
+
 ## Detailed input reference
 ### Function
 The function should be a valid expression, written with a syntax accepted by the Sympy expression parser. Refer to [SymPy documentation](https://docs.sympy.org) for details.
