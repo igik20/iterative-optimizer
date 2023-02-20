@@ -144,7 +144,7 @@ class G_Search:
             generations[iteration] = (blow, a, b, bup)
             #next iteration
             iteration+=1
-        return bnew, func(bnew), generations
+        return bnew[2], func(bnew[2]), generations
 
     
     

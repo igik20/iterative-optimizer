@@ -160,7 +160,19 @@ class OutputWindow(ctk.CTk):
                     self.data["optval"],
                 )
         else:
-            pass
+            if genname.startswith("Gen"):
+                gen = self.generations[int(genname.split()[-1])]
+                G_Search.plot_generation(
+                    self.data["exec"], gen[0], gen[1], gen[2], gen[3]
+                )
+            else:
+                G_Search.plot_result(
+                    self.data["exec"],
+                    self.data["lower"],
+                    self.data["upper"],
+                    self.data["optpos"],
+                    self.data["optval"],
+                )
 
 
 class InputWindow(ctk.CTk):
