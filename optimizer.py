@@ -31,7 +31,7 @@ class Optimizer:
                 self.exec, self.lower, self.upper, self.limittype, self.limitval, self.target
             )
         else:
-            (self.optpos, self.optval, self.versiq) = G_Search.GOLDEN_search(
+            (self.optpos, self.optval, self.generations) = G_Search.GOLDEN_search(
                 self.exec,
                 self.lower,
                 self.upper,
