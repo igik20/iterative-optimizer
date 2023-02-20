@@ -29,6 +29,7 @@ class G_Search:
     # differ for both cases mentioned above, therefore we will have the 2 following functions - min_search and max_search.
     # opt_pt: optimal point
     # new_pt: new point, using the function boundary_insidepts
+    '''
     @staticmethod
     def min_search(func, blow, bup, a, b):
         f1 = func(a)
@@ -68,7 +69,7 @@ class G_Search:
             b = new_pt[1]
             opt_pt = a
         return blow, bup, opt_pt
-
+'''
     # Lastly, we will create the final function called Golden Search which is using all the functions above to represent the Golden
     # Search Algorithm.
     #
@@ -99,9 +100,43 @@ class G_Search:
                 break
 
             if version == "Maximum":
-                bnew = G_Search.max_search(func, blow, bup, a, b)
+                f1 = func(a)
+                f2 = func(b)
+                if f2 > f1:
+                    blow = blow
+                    bup = a
+                    new_pt = G_Search.boundary_insidepts(blow, bup)
+                    a = new_pt[0]
+                    b = new_pt[1]
+                    opt_pt = b
+                else:
+                    blow = b
+                    bup = bup
+                    new_pt = G_Search.boundary_insidepts(blow, bup)
+                    a = new_pt[0]
+                    b = new_pt[1]
+                    opt_pt = a
+                return blow, bup, opt_pt
+                #bnew = G_Search.max_search(func, blow, bup, a, b)
             elif version == "Minimum":
-                bnew = G_Search.min_search(func, blow, bup, a, b)
+                f1 = func(a)
+                f2 = func(b)
+                if f2 > f1:
+                    blow = b
+                    bup = bup
+                    new_pt = G_Search.boundary_insidepts(blow, bup)
+                    a = new_pt[0]
+                    b = new_pt[1]
+                    opt_pt = a
+                else:
+                    blow = blow
+                    bup = a
+                    new_pt = G_Search.boundary_insidepts(blow, bup)
+                    a = new_pt[0]
+                    b = new_pt[1]
+                    opt_pt = b
+                return blow, bup, opt_pt
+                #bnew = G_Search.min_search(func, blow, bup, a, b)
             else:
                 print("Minimum/Maximum status not definded properly.")
                 break
